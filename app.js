@@ -4,6 +4,12 @@ const router = express.Router()
 const config = require('./config.js')
 const Twit = require('twit')
 const cors = require('cors')
+var bodyParser = require('body-parser');
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/',router)
+app.listen(3000)
 
 const T = new Twit({
   consumer_key:         config.consumer_key,
@@ -14,6 +20,7 @@ const T = new Twit({
 })
 
 router.get('/myTweet',function(req,res){
+  console.log(req.body.tweet);
   T.get('statuses/user_timeline', function(err, data, response) {
     res.send(data)
   })
@@ -25,7 +32,3 @@ router.post('/tweetPost',function(req,res){
     res.send(data)
   })
 })
-
-app.use(cors());
-app.use('/',router)
-app.listen(3000)

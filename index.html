@@ -7,8 +7,10 @@
   </head>
   <body>
     <button type="button" name="button-show-tweet" onclick="RecTweet()">Show my Recent tweet!</button>
-    <input type="text" name="tweet" value="">
-    <button type="button" name="button-post-tweet" onclick="PosTweet()">Post a tweet!</button>
+    <form id="newTweet" method="post">
+      <input type="text" name="tweet">
+      <button type="submit" name="button-post-tweet" onclick="PosTweet()">Post a tweet!</button>
+    </form>
     <div id="tweetah">
     </div>
   </body>
