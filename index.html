@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title>Twittah</title>
+  </head>
+  <body>
+    <button type="button" name="button-show-tweet" onclick="RecTweet()">Show my Recent tweet!</button>
+    <input type="text" name="tweet" value="">
+    <button type="button" name="button-post-tweet" onclick="PosTweet()">Post a tweet!</button>
+    <div id="tweetah">
+    </div>
+  </body>
+  <script>
+    function RecTweet(){
+      $.ajax({
+        type: 'GET',
+        url: 'http://localhost:3000/myTweet',
+        success: function(resp) {
+          resp.forEach(function(data){
+            $('#tweetah').append(`<p>${data.text}</p>`)
+          })
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
+    }
+
+    function PosTweet(){
+      $.ajax({
+        type: 'POST',
+        url: 'http://localhost:3000/tweetPost',
+        success: function() {
+          RecTweet()
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
+    }
+  </script>
+</html>
