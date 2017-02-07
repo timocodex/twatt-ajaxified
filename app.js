@@ -28,7 +28,7 @@ router.get('/myTweet',function(req,res){
 
 router.post('/tweetPost',function(req,res){
 
-  T.post('statuses/update',{status:req.body.tweet}, function(err, data, response) {
+  T.post('statuses/update', {status:req.body.tweeter}, function(err, data, response) {
     res.send(data)
   })
 })

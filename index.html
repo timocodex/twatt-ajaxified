@@ -7,10 +7,8 @@
   </head>
   <body>
     <button type="button" name="button-show-tweet" onclick="RecTweet()">Show my Recent tweet!</button>
-    <form id="newTweet" method="post">
-      <input type="text" name="tweet">
+      <input type="text" id="tweet">
       <button type="submit" name="button-post-tweet" onclick="PosTweet()">Post a tweet!</button>
-    </form>
     <div id="tweetah">
     </div>
   </body>
@@ -20,6 +18,7 @@
         type: 'GET',
         url: 'http://localhost:3000/myTweet',
         success: function(resp) {
+          $('#tweetah').empty()
           resp.forEach(function(data){
             $('#tweetah').append(`<p>${data.text}</p>`)
           })
@@ -34,7 +33,8 @@
       $.ajax({
         type: 'POST',
         url: 'http://localhost:3000/tweetPost',
-        success: function() {
+        data:{tweeter:$('#tweet').val()},
+        success: function(data) {
           RecTweet()
         },
         error: function(error) {
